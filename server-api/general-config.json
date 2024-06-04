@@ -1,0 +1,16 @@
+{
+    "eventWaitTime": 600000,
+    "loglevel": "INFO",
+    "adminList": [
+        {
+            "org": "org1",
+            "username": "admin",
+            "password": "adminpw"
+        },
+        {
+            "org": "org2",
+            "username": "admin",
+            "password": "adminpw"
+        }
+    ]
+}

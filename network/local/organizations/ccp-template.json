@@ -1,0 +1,65 @@
+{
+    "name": "test-network-${ORG}",
+    "version": "1.0.0",
+    "isLocal": true,
+    "client": {
+        "organization": "${ORG}",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "${ORG}": {
+            "mspid": "${ORG}MSP",
+            "peers": [
+                "peer0.${PEER}",
+                "peer1.${PEER}"
+            ],
+            "certificateAuthorities": [
+                "ca.${PEER}"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.${PEER}": {
+            "url": "grpcs://localhost:${P0PORT}",
+            "tlsCACerts": {
+                "pem": "${PEERPEM}"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.${PEER}",
+                "hostnameOverride": "peer0.${PEER}"
+            }
+        },
+        "peer1.${PEER}": {
+            "url": "grpcs://localhost:${P1PORT}",
+            "tlsCACerts": {
+                "pem": "${PEERPEM}"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.${PEER}",
+                "hostnameOverride": "peer1.${PEER}"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.${PEER}": {
+            "url": "https://localhost:${CAPORT}",
+            "caName": "ca-${PEER}",
+            "tlsCACerts": {
+                "pem": [
+                    "${CAPEM}"
+                ]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
+
+

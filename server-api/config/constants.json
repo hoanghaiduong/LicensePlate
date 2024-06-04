@@ -1,0 +1,16 @@
+{
+    "channelName": "channel",
+    "chaincodeName": "basic",
+    "logLevel": "INFO",
+    "peerName": "peer0.org1",
+    "mspId": "Org1MSP",
+    "peerEndpoint": "localhost:4444",
+    "secret": "thisismysecret",
+    "host": "localhost",
+    "port": "3001",
+    "orgName": "org1",
+    "jwt_expiretime": "360000",
+    "masterKey": "P@ssW0rd1!#",
+    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+    "hashingAlgorithm": "sha2-256"
+}

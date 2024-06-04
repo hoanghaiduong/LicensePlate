@@ -1,0 +1,92 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '3.7'
+
+networks:
+  test:
+    name: network
+
+services:
+  ca_org1:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-org1
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4400
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:14400
+    ports:
+      - "4400:4400"
+      - "14400:14400"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/org1:/etc/hyperledger/fabric-ca-server
+    container_name: ca_org1
+    networks:
+      - test
+
+  ca_org2:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-org2
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=5500
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:15500
+    ports:
+      - "5500:5500"
+      - "15500:15500"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/org2:/etc/hyperledger/fabric-ca-server
+    container_name: ca_org2
+    networks:
+      - test
+
+  ca_orderer1:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer1
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=2200
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:12200
+    ports:
+      - "2200:2200"
+      - "12200:12200"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orderer1:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orderer1
+    networks:
+      - test
+  ca_orderer2:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer2
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=2201
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:12201
+    ports:
+      - "2201:2201"
+      - "12201:12201"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orderer2:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orderer2
+    networks:
+      - test
+
+
